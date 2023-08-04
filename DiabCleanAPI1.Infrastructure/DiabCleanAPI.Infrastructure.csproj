@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Mapster" Version="7.3.0" />
+    <PackageReference Include="MediatR" Version="12.1.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.9" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\DiabCleanAPI.API\DiabCleanAPI.API.csproj" />
+    <ProjectReference Include="..\DiabCleanAPI1.Application\DiabCleanAPI.Application.csproj" />
+    <ProjectReference Include="..\DiabCleanAPI1.Domain\DiabCleanAPI.Domain.csproj" />
+    <ProjectReference Include="..\DiabCleanAPI1.Shared\DiabCleanAPI.Shared.csproj" />
+  </ItemGroup>
+
+</Project>

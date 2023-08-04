@@ -24,8 +24,4 @@
     <Folder Include="Commands\CompanyCommands\Handlers\" />
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\DiabCleanAPI.Domain\DiabCleanAPI.Domain.csproj" />
-  </ItemGroup>
-
 </Project>

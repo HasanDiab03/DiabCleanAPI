@@ -1,5 +1,6 @@
 ﻿using DiabCleanAPI.Application.Commands.EmployeeCommands;
 using DiabCleanAPI.Application.Commands.EmployeeCommands.Handlers;
+using DiabCleanAPI.Application.Queries.EmployeeQueries;
 using DiabCleanAPI.DiabCleanAPI.Application.Commands.EmployeeCommands;
 using DiabCleanAPI.DiabCleanAPI.Application.DTOs;
 using DiabCleanAPI.DiabCleanAPI.Application.Queries.EmployeeQueries;
@@ -27,5 +28,7 @@ namespace DiabCleanAPI.API.Controllers
             => await mediator.Send(command);
         public async Task Delete(DeleteEmployeeCommand command)
             => await mediator.Send(command);
+        public async Task<CompanyDTO?> Get([FromQuery] GetEmployeeCompanyQuery query)
+            => await mediator.Send(query);
     }
 }

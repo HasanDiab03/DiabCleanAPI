@@ -2,10 +2,10 @@
 
 #nullable disable
 
-namespace DiabCleanAPI.API.Migrations
+namespace DiabCleanAPI.Infrastructure.Migrations
 {
     /// <inheritdoc />
-    public partial class Starter : Migration
+    public partial class starter : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

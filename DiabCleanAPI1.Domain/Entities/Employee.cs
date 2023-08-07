@@ -1,4 +1,6 @@
-﻿namespace DiabCleanAPI
+﻿using FluentValidation;
+
+namespace DiabCleanAPI
 {
     public class Employee
     {

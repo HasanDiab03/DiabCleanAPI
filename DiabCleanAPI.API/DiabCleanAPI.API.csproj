@@ -26,6 +26,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\DiabCleanAPI1.Application\DiabCleanAPI.Application.csproj" />
+    <ProjectReference Include="..\DiabCleanAPI1.Infrastructure\DiabCleanAPI.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>

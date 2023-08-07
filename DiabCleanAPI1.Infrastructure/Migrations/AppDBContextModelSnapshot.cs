@@ -3,19 +3,16 @@ using System;
 using DiabCleanAPI;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace DiabCleanAPI.API.Migrations
+namespace DiabCleanAPI.Infrastructure.Migrations
 {
     [DbContext(typeof(AppDBContext))]
-    [Migration("20230805125047_Starter")]
-    partial class Starter
+    partial class AppDBContextModelSnapshot : ModelSnapshot
     {
-        /// <inheritdoc />
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "7.0.9");

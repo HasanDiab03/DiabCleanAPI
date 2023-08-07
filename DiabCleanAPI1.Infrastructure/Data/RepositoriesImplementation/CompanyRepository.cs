@@ -1,5 +1,6 @@
 ﻿using DiabCleanAPI.DiabCleanAPI.Application.Repositories;
 using DiabCleanAPI.DiabCleanAPI.Shared;
+using FluentValidation;
 using Microsoft.EntityFrameworkCore;
 
 namespace DiabCleanAPI.DiabCleanAPI.Infrastructure.Data.RepositoriesImplementation
@@ -8,8 +9,10 @@ namespace DiabCleanAPI.DiabCleanAPI.Infrastructure.Data.RepositoriesImplementati
     {
         private readonly AppDBContext context;
         private readonly DbSet<Company> companies;
-        public CompanyRepository(AppDBContext context) : base(context) 
+        private readonly IValidator<Employee> validator;
+        public CompanyRepository(AppDBContext context, IValidator<Employee> validator) : base(context) 
         {
+            this.validator = validator;
             this.context = context;
             this.companies = this.context.Set<Company>();
         }

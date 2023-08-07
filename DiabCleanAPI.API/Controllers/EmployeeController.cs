@@ -18,16 +18,22 @@ namespace DiabCleanAPI.API.Controllers
         {
             this.mediator = mediator;
         }
+        [HttpGet]
         public async Task<List<EmployeeDTO>> Get([FromQuery] GetAllEmployeesQuery query)
             => await mediator.Send(query);
+        [HttpGet("ById")]
         public async Task<EmployeeDTO> Get([FromQuery] GetEmployeeByIdQuery query)
             => await mediator.Send(query);
+        [HttpPost]
         public async Task<EmployeeDTO> Post(CreateEmployeeCommand command)
             => await mediator.Send(command);
+        [HttpPut]
         public async Task<EmployeeDTO> Put(UpdateEmployeeCommand command)
             => await mediator.Send(command);
+        [HttpDelete]
         public async Task Delete(DeleteEmployeeCommand command)
             => await mediator.Send(command);
+        [HttpGet("GetCompany")]
         public async Task<CompanyDTO?> Get([FromQuery] GetEmployeeCompanyQuery query)
             => await mediator.Send(query);
     }

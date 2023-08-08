@@ -1,5 +1,7 @@
 ﻿using DiabCleanAPI.DiabCleanAPI.Application.DTOs;
 using DiabCleanAPI.DiabCleanAPI.Application.Repositories;
+using DiabCleanAPI.Shared;
+using DiabCleanAPI.Shared.RequestAbstractions;
 using Mapster;
 using MediatR;
 using System;
@@ -7,10 +9,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace DiabCleanAPI.Application.Commands.CompanyCommands.Handlers
 {
-    public class AddExistingEmployeeToCompanyHandler : IRequestHandler<AddExistingEmployeeToCompanyCommand, CompanyDTO>
+    public class AddExistingEmployeeToCompanyHandler : ICommandHandler<AddExistingEmployeeToCompanyCommand, CompanyDTO>
     {
         private readonly ICompanyRepository companyRepository;
         public AddExistingEmployeeToCompanyHandler(ICompanyRepository companyRepository)
@@ -18,10 +21,11 @@ namespace DiabCleanAPI.Application.Commands.CompanyCommands.Handlers
                 this.companyRepository = companyRepository;
         }
 
-        public async Task<CompanyDTO> Handle(AddExistingEmployeeToCompanyCommand request, CancellationToken cancellationToken)
+        public async Task<Response<CompanyDTO>> Handle(AddExistingEmployeeToCompanyCommand request, CancellationToken cancellationToken)
         {
             var company = await companyRepository.AddExistingEmployeeToCompany(request.companyId, request.employeeId);
-            return company.Adapt<Company, CompanyDTO>();
+            return Response.Success(company.Adapt<Company, CompanyDTO>(), "Added Existing Employee Successfully");
+
         }
     }
 }

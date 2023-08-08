@@ -1,6 +1,7 @@
 ﻿using DiabCleanAPI.Application.Commands.CompanyCommands;
 using DiabCleanAPI.DiabCleanAPI.Application.DTOs;
 using DiabCleanAPI.DiabCleanAPI.Application.Queries.CompanyQueries;
+using DiabCleanAPI.Shared;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -22,22 +23,22 @@ namespace DiabCleanAPI.API.Controllers
         public async Task<CompanyDTO> Get([FromQuery] GetCompanyByIdQuery query)
             => await mediator.Send(query);
         [HttpPost]
-        public async Task<CompanyDTO> Post(CreateCompanyCommand command)
+        public async Task<Response<CompanyDTO>> Post(CreateCompanyCommand command)
             => await mediator.Send(command);
         [HttpPut]
-        public async Task<CompanyDTO> Put(UpdateCompanyComand command)
+        public async Task<Response<CompanyDTO>> Put(UpdateCompanyComand command)
             => await mediator.Send(command);
         [HttpDelete]
         public async Task Delete(DeleteCompanyCommand command)
             => await mediator.Send(command);
         [HttpPut("AddNewEmployee")]
-        public async Task<CompanyDTO> Put(AddEmployeeToCompanyCommand command)
+        public async Task<Response<CompanyDTO>> Put(AddEmployeeToCompanyCommand command)
             => await mediator.Send(command);
         [HttpPut("AddExistingEmployee")]
-        public async Task<CompanyDTO> Put(AddExistingEmployeeToCompanyCommand command)
+        public async Task<Response<CompanyDTO>> Put(AddExistingEmployeeToCompanyCommand command)
             => await mediator.Send(command);
         [HttpDelete("RemoveEmployee")]
-        public async Task<CompanyDTO> Put(RemoveEmployeeFromCompanyCommand command)
+        public async Task<Response<CompanyDTO>> Put(RemoveEmployeeFromCompanyCommand command)
             => await mediator.Send(command);
     }
 }

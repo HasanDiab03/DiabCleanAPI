@@ -1,4 +1,6 @@
 ﻿using DiabCleanAPI.DiabCleanAPI.Application.Repositories;
+using DiabCleanAPI.Shared;
+using DiabCleanAPI.Shared.RequestAbstractions;
 using MediatR;
 using System;
 using System.Collections.Generic;
@@ -8,17 +10,17 @@ using System.Threading.Tasks;
 
 namespace DiabCleanAPI.Application.Commands.CompanyCommands.Handlers
 {
-    public class DeleteCompanyCommandHandler : IRequestHandler<DeleteCompanyCommand, Unit>
+    public class DeleteCompanyCommandHandler : ICommandHandler<DeleteCompanyCommand, Unit>
     {
         private readonly ICompanyRepository companyRepository;
         public DeleteCompanyCommandHandler(ICompanyRepository companyRepository)
         {
             this.companyRepository = companyRepository;
         }
-        public async Task<Unit> Handle(DeleteCompanyCommand request, CancellationToken cancellationToken)
+        public async Task<Response<Unit>> Handle(DeleteCompanyCommand request, CancellationToken cancellationToken)
         {
             await companyRepository.DeleteAsync(request.id);
-            return Unit.Value;
+            return Response.Success(Unit.Value, "Successfully deleted company");
 
         }
     }

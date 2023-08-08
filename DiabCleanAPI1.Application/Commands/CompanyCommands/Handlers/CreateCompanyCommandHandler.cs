@@ -1,5 +1,7 @@
 ﻿using DiabCleanAPI.DiabCleanAPI.Application.DTOs;
 using DiabCleanAPI.DiabCleanAPI.Application.Repositories;
+using DiabCleanAPI.Shared;
+using DiabCleanAPI.Shared.RequestAbstractions;
 using FluentValidation;
 using Mapster;
 using MediatR;
@@ -11,7 +13,7 @@ using System.Threading.Tasks;
 
 namespace DiabCleanAPI.Application.Commands.CompanyCommands.Handlers
 {
-    public class CreateCompanyCommandHandler : IRequestHandler<CreateCompanyCommand, CompanyDTO>
+    public class CreateCompanyCommandHandler : ICommandHandler<CreateCompanyCommand, CompanyDTO>
     {
         private readonly ICompanyRepository companyRepository;
         private readonly IValidator<Company> validator;
@@ -20,7 +22,7 @@ namespace DiabCleanAPI.Application.Commands.CompanyCommands.Handlers
             this.validator = validator;
             this.companyRepository = companyRepository;
         }
-        public async Task<CompanyDTO> Handle(CreateCompanyCommand request, CancellationToken cancellationToken)
+        public async Task<Response<CompanyDTO>> Handle(CreateCompanyCommand request, CancellationToken cancellationToken)
         {
             var (Name, Field) = request;
             var add = new Company(Name, Field);
@@ -30,7 +32,7 @@ namespace DiabCleanAPI.Application.Commands.CompanyCommands.Handlers
                 throw new ValidationException(validate.Errors);
             }
             var company = await companyRepository.AddAsync(add);
-            return company.Adapt<Company, CompanyDTO>();
+            return Response.Success(company.Adapt<Company, CompanyDTO>(), "Successfully created a new company");
         }
     }
 }

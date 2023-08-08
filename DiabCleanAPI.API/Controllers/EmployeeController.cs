@@ -4,6 +4,7 @@ using DiabCleanAPI.Application.Queries.EmployeeQueries;
 using DiabCleanAPI.DiabCleanAPI.Application.Commands.EmployeeCommands;
 using DiabCleanAPI.DiabCleanAPI.Application.DTOs;
 using DiabCleanAPI.DiabCleanAPI.Application.Queries.EmployeeQueries;
+using DiabCleanAPI.Shared;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -25,10 +26,10 @@ namespace DiabCleanAPI.API.Controllers
         public async Task<EmployeeDTO> Get([FromQuery] GetEmployeeByIdQuery query)
             => await mediator.Send(query);
         [HttpPost]
-        public async Task<EmployeeDTO> Post(CreateEmployeeCommand command)
+        public async Task<Response<EmployeeDTO>> Post(CreateEmployeeCommand command)
             => await mediator.Send(command);
         [HttpPut]
-        public async Task<EmployeeDTO> Put(UpdateEmployeeCommand command)
+        public async Task<Response<EmployeeDTO>> Put(UpdateEmployeeCommand command)
             => await mediator.Send(command);
         [HttpDelete]
         public async Task Delete(DeleteEmployeeCommand command)

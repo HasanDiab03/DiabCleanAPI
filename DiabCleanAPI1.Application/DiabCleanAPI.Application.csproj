@@ -19,6 +19,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\DiabCleanAPI1.Domain\DiabCleanAPI.Domain.csproj" />
+    <ProjectReference Include="..\DiabCleanAPI1.Shared\DiabCleanAPI.Shared.csproj" />
   </ItemGroup>
 
 </Project>

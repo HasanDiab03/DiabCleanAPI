@@ -1,5 +1,7 @@
 ﻿using DiabCleanAPI.DiabCleanAPI.Application.DTOs;
 using DiabCleanAPI.DiabCleanAPI.Application.Repositories;
+using DiabCleanAPI.Shared;
+using DiabCleanAPI.Shared.RequestAbstractions;
 using Mapster;
 using MediatR;
 using System;
@@ -10,20 +12,20 @@ using System.Threading.Tasks;
 
 namespace DiabCleanAPI.Application.Commands.CompanyCommands.Handlers
 {
-    public class UpdateCompanyCommandHandler : IRequestHandler<UpdateCompanyComand, CompanyDTO>
+    public class UpdateCompanyCommandHandler : ICommandHandler<UpdateCompanyComand, CompanyDTO>
     {
         private readonly ICompanyRepository companyRepository;
         public UpdateCompanyCommandHandler(ICompanyRepository companyRepository)
         {
             this.companyRepository = companyRepository;
         }
-        public async Task<CompanyDTO> Handle(UpdateCompanyComand request, CancellationToken cancellationToken)
+        public async Task<Response<CompanyDTO>> Handle(UpdateCompanyComand request, CancellationToken cancellationToken)
         {
             var (id, name, field) = request;
             var toUpdate = await companyRepository.GetByIdAsync(id);
             toUpdate.Update(name, field);
             var updated = await companyRepository.UpdateAsync(toUpdate);
-            return updated.Adapt<Company, CompanyDTO>();
+            return Response.Success(updated.Adapt<Company, CompanyDTO>(), "Succesfully updated company details");
         }
     }
 }

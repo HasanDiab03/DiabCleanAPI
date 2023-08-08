@@ -1,5 +1,7 @@
 ﻿using DiabCleanAPI.DiabCleanAPI.Application.DTOs;
 using DiabCleanAPI.DiabCleanAPI.Application.Repositories;
+using DiabCleanAPI.Shared;
+using DiabCleanAPI.Shared.RequestAbstractions;
 using Mapster;
 using MediatR;
 using System;
@@ -10,17 +12,17 @@ using System.Threading.Tasks;
 
 namespace DiabCleanAPI.Application.Commands.CompanyCommands.Handlers
 {
-    public class RemoveEmployeeFromCompanyHandler : IRequestHandler<RemoveEmployeeFromCompanyCommand, CompanyDTO>
+    public class RemoveEmployeeFromCompanyHandler : ICommandHandler<RemoveEmployeeFromCompanyCommand, CompanyDTO>
     {
         private readonly ICompanyRepository companyRepository;
         public RemoveEmployeeFromCompanyHandler(ICompanyRepository companyRepository)
         {
             this.companyRepository = companyRepository;
         }
-        public async Task<CompanyDTO> Handle(RemoveEmployeeFromCompanyCommand request, CancellationToken cancellationToken)
+        public async Task<Response<CompanyDTO>> Handle(RemoveEmployeeFromCompanyCommand request, CancellationToken cancellationToken)
         {
             var company = await companyRepository.RemoveEmployeeFromCompanyAsync(request.companyId, request.employeeId);
-            return company.Adapt<Company, CompanyDTO>();
+            return Response.Success(company.Adapt<Company, CompanyDTO>(), "Succesfully remove employee from company");
         }
     }
 }
